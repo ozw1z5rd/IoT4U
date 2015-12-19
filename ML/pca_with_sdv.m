@@ -1,4 +1,4 @@
-clc;
+clc; clf;
 clear;
 
 fprintf("PCA con SVD\n");
@@ -25,7 +25,7 @@ std(xn)
 pause;
 
 
-
+figure 1;
 plot3(xn(:,1),xn(:,2),xn(:,3), "or");
 grid on;
 hold on;
@@ -43,7 +43,7 @@ c = xn'*xn/(size(x0,1)-1)
 
 varLoss = cumsum( diag(S)/sum(diag(S)))*100
 fprintf("Proiettando in 2D il training set rimane il %f%% della varianza,\n", varLoss(2));
-fprintf("la forma del training set e' praticamente mantenuta");
+fprintf("la forma del training set e' praticamente mantenuta\n");
 pause;
 
 fprintf("Proiezione dei dati nel nuovo sistema di riferimento\n");

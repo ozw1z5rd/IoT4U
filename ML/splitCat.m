@@ -1,8 +1,8 @@
 %
-% This program will get the single face from the 
-% cat grid.
+% This program loads training set from the 
+% cats picture.
 %
-
+more off;
 pkg load image
 
 % default image size for width, height changes
@@ -17,6 +17,7 @@ catsGrid = imread("neko.orig.jpg");
 colormap("gray");
 
 trainingSet = zeros( 30, 1600 );
+fprintf("Loading cats' data from the picture\n");
 for i = 1:rows 
   size_y = SIZE_Y(i);
   for j = 1:cols
@@ -51,4 +52,26 @@ for i = 1:rows
   endfor
   top += size_y;
 endfor
-   
+
+close all;
+
+fprintf("Data loaded, starting to reduce the features\n");
+fprintf("This will take a while...\n");
+
+[ S,V ] = PCA(trainingSet);
+Sc = cumsum(S);
+fprintf("Features reduced from 1600 to 28, saved %f%% of variance\n",Sc(28));
+trainingSetReduced = trainingSet * V(:,1:28);
+fprintf("Done\n");
+
+fprintf("To visualize the data into a 3D space we can save one %f%% of variance\n",Sc(3));
+t3 = trainingSet * V(:,1:3);
+
+figure 1;
+clf;
+plot3( t3(:,1),t3(:,2),t3(:,3), "xr");
+grid on;
+title("Cats' faces on 3D space, weak idea");
+pause;
+
+more on;
