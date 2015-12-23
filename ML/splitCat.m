@@ -1,12 +1,11 @@
 %
-% This program loads training set from the 
-% cats picture.
+% save all cats for training set as single
+% files. 40 x 40 gray scale.
+% https://66bbce2a-a-62cb3a1a-s-sites.googlegroups.com/site/ozw1z5rd/machinelearning/020-vector-support-machine/cats_portrait_cute_animals_faces_1280x800_hd-wallpaper-1667846.jpg?attachauth=ANoY7cr0kyJXWsYoX7dC0H1nsZDq2L4kDF-NQLKQ8avrmu67DD7CgCEBWwZUf0HQEjBDXGT8yu1ojxtJ9uymBNea0KRiIAJpTnKR-qwjpSCCP7tAjuusf1wuuB3YqEzQSvWqCt7ZFiqSGqepXFZHHXz4Hu7mdGnerfiyjY_oleqtv4dtTR1yF6ABVQNngRuGmIqdf_7jT-yxaPhNgR7vnIosOrQue4MnnNQw_vk14VZ3PiPrvnOPRUw3Jo-ssJVgSKkFfvSyynI8VYAAb81WPmVQmImm8CHPhxTg2Z70D2qAoLxtHz30KF6JLGoXzmBvrC8k5vdHEfBXQYWDioQzK52WbscnTH66xg%3D%3D&attredirects=0
 %
 more off;
 pkg load image
 
-% default image size for width, height changes
-% on the row
 size_x = 213;
 top = 1; rows = 5; cols = 6;
 
@@ -16,7 +15,6 @@ SIZE_Y = [ 198 213 213 213 186  ];
 catsGrid = imread("neko.orig.jpg");
 colormap("gray");
 
-trainingSet = zeros( 30, 1600 );
 fprintf("Loading cats' data from the picture\n");
 for i = 1:rows 
   size_y = SIZE_Y(i);
@@ -29,49 +27,19 @@ for i = 1:rows
      
     % convert to gray scale
     [ X, MAP ] = rgb2ind( imgR );
-    imgGS = ind2gray( X, MAP );
-        
-    % edge detection
-    %imgGSE = edge( imgGS, "Sobel");
-    
+    imgGS = ind2gray( X, MAP );        
+   
     % original picture
     imagesc( imgR );
     pause(0.1);
     % grayscale version
     imagesc( imgGS );
     pause(0.1);
-    % decrease colors
-    imgMASK = imgGS/1024; % + imgGSE * 8; 
-    
-    imagesc( imgMASK );
-    pause( 0.1 );
-   
-    % questa e' la matrice con i dati del training set
-    trainingSet(index, : ) = reshape(imgMASK, [ 1, 1600 ] );
+        
+    fileName = sprintf("ts%02d.png",index);
+    imwrite( imgGS , fileName );
     
   endfor
   top += size_y;
 endfor
-
 close all;
-
-fprintf("Data loaded, starting to reduce the features\n");
-fprintf("This will take a while...\n");
-
-[ S,V ] = PCA(trainingSet);
-Sc = cumsum(S);
-fprintf("Features reduced from 1600 to 28, saved %f%% of variance\n",Sc(28));
-trainingSetReduced = trainingSet * V(:,1:28);
-fprintf("Done\n");
-
-fprintf("To visualize the data into a 3D space we can save one %f%% of variance\n",Sc(3));
-t3 = trainingSet * V(:,1:3);
-
-figure 1;
-clf;
-plot3( t3(:,1),t3(:,2),t3(:,3), "xr");
-grid on;
-title("Cats' faces on 3D space, weak idea");
-pause;
-
-more on;
