@@ -9,6 +9,7 @@ imgSize = [260 260];
 py = 1; 
 % https://66bbce2a-a-62cb3a1a-s-sites.googlegroups.com/site/ozw1z5rd/machinelearning/020-vector-support-machine/collage-different-cute-cats-many-faces-46520920.jpg?attachauth=ANoY7cqXdu_9FECdl8c3ntQ9UEv1q9Jee0Qyh2Ihp57VU5rBZVaa7iWQotTOIPYmiBtrvDM4QZYYQ6hQ27-7QBJbI0ag8A_xh1tYdInfzBV9eIX_Klpt5pWXfE0imTcTnB_M6qanRcDNY8ITE_dXc8jinUbaVt5c46ZI8h-41zv-VuSY55-TBadY6deJ4beWsiV72_BCx5JNRei9nMBDIlW7fEHyK3uETk_LNRfNqisHlQ1UWTJOOURH8w1iiBx-81aKx8ddDbIBTxn9Q3ZSvNWutDR-s7q8lDRE-i5JKoruvxjM-8-xwXg_GhC33HSy3KvOb7vihunx&attredirects=0
 % https://sites.google.com/site/ozw1z5rd/machinelearning/020-vector-support-machine
+urlwrite("https://66bbce2a-a-62cb3a1a-s-sites.googlegroups.com/site/ozw1z5rd/machinelearning/020-vector-support-machine/collage-different-cute-cats-many-faces-46520920.jpg","test.jpg");
 img = imread("test.jpg");
 colormap("gray");
 

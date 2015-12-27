@@ -4,7 +4,7 @@
 % https://66bbce2a-a-62cb3a1a-s-sites.googlegroups.com/site/ozw1z5rd/machinelearning/020-vector-support-machine/cats_portrait_cute_animals_faces_1280x800_hd-wallpaper-1667846.jpg?attachauth=ANoY7cr0kyJXWsYoX7dC0H1nsZDq2L4kDF-NQLKQ8avrmu67DD7CgCEBWwZUf0HQEjBDXGT8yu1ojxtJ9uymBNea0KRiIAJpTnKR-qwjpSCCP7tAjuusf1wuuB3YqEzQSvWqCt7ZFiqSGqepXFZHHXz4Hu7mdGnerfiyjY_oleqtv4dtTR1yF6ABVQNngRuGmIqdf_7jT-yxaPhNgR7vnIosOrQue4MnnNQw_vk14VZ3PiPrvnOPRUw3Jo-ssJVgSKkFfvSyynI8VYAAb81WPmVQmImm8CHPhxTg2Z70D2qAoLxtHz30KF6JLGoXzmBvrC8k5vdHEfBXQYWDioQzK52WbscnTH66xg%3D%3D&attredirects=0
 %
 more off;
-pkg load image
+pkg load image;
 
 size_x = 213;
 top = 1; rows = 5; cols = 6;
@@ -12,6 +12,7 @@ top = 1; rows = 5; cols = 6;
 % image height depends on the row
 SIZE_Y = [ 198 213 213 213 186  ];
 
+urlwrite ("https://66bbce2a-a-62cb3a1a-s-sites.googlegroups.com/site/ozw1z5rd/machinelearning/020-vector-support-machine/cats_portrait_cute_animals_faces_1280x800_hd-wallpaper-1667846.jpg","neko.orig.jpg")
 catsGrid = imread("neko.orig.jpg");
 colormap("gray");
 
@@ -22,6 +23,8 @@ for i = 1:rows
     index = j + ( i-1 ) * cols;
     left = 1+(j-1)*size_x;
     img = catsGrid(top:top+size_y,left:left+size_x,:);
+    
+    imagesc( img ); pause( 0.8);
     % make all the cat the same size.
     imgR = imresize( img, [ 40, 40 ] );
      

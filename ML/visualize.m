@@ -26,6 +26,8 @@ endif
   figure 1;
   clf;
   plot3( t3(:,1),t3(:,2),t3(:,3), "xr");
+  max(t3)
+  min(t3)
   grid on;
   title("Cats' faces on 3D space, weak idea");
 
