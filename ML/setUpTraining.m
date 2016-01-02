@@ -3,10 +3,10 @@
 % this will save the data on disk 
 % for later use.
 %
-
+pkg load image;
 more off;
 
-splitCat;  % get samples for training set
+splitCat3;  % get samples for training set
 splitCat2; % get samples for test
 
 fprintf("Loading data for training set and performing PCA \n");

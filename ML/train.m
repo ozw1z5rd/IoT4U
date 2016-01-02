@@ -16,7 +16,7 @@ svMatrix = [ ]
     nu = 0.03 + 0.24*nux;
     successMatrix(nux+1,1) = nu;
     fprintf("Training with nu=%0.1f ... ",nu);
-    model = svmtrain ( ones(30,1), dr, sprintf("-s 2 -t 1 -nu %0.2f -q", nu));
+    model = svmtrain ( ones(30,1), dr, sprintf("-s 2 -t 1 -d 4 -nu %0.2f -gamma 0.0001 -q", nu));
         
     fprintf("Total support vectors : %d\n",model.totalSV);
     svMatrix( end + 1) = model.totalSV;
@@ -36,13 +36,15 @@ svMatrix = [ ]
       colormap("gray");
       fileName = sprintf("t%02d.png",i);
       im = imread( fileName );
+      
       subplot(2,2,1);
       imagesc( im ); pause( 0.5 );
   
   
       im = double(im );
       % decrease dimensions
-      imr = reshape(im,[1,1600]) * v(:,1:28);
+      ld = size( im );
+      imr = reshape(im,[1,ld(1)*ld(2)]) * v(:,1:28);
       class = svmpredict([ 1 ], imr, model, "-q" );
       if ( class == 1 ) 
         colormap("summer");

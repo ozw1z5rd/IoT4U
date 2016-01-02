@@ -26,7 +26,8 @@ function [ dataSet, S, V ] = prepareData( nSamples )
     fileName = sprintf("ts%02d.png",i);
     fprintf("Loading %s ...\n", fileName );
     img =  double(imread( fileName ));
-    dataSet = [ dataSet;  reshape( img, [1,1600]) ] ;
+    ld = size(img);
+    dataSet = [ dataSet;  reshape( img, [1,ld(1)*ld(2)]) ] ;
   endfor
   fprintf("Data set loaded, computing PCA data\n");
   [ S, V ] = PCA( dataSet );
