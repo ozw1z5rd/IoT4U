@@ -6,15 +6,9 @@
 #include "strings.h"
 #include <locale.h>
 
-
-
-
-
 int		page(struct http_request *);
 char *		format_integer( long long int, char *);
 void            get_free_space_info( char *, char *);
-
-
 
 char *
 format_integer( long long int n, char *out ) {
@@ -36,7 +30,6 @@ format_integer( long long int n, char *out ) {
         return q;
 }
 
-
 void
 get_free_space_info(char *buff, char *fs) {
     struct statvfs vfs;
@@ -54,22 +47,13 @@ get_free_space_info(char *buff, char *fs) {
 
 }
 
-
-
-
-
 int
 page(struct http_request *req)
 {
         char s_response[256];
-	get_free_space_info( s_response, "/mnt/media" );
+	get_free_space_info( s_response, "/bin" );
 	http_response(req, 200, s_response, strlen(s_response));
 	return (KORE_RESULT_OK);
 }
-
-
-
-
-
 
 
