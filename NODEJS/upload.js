@@ -10,7 +10,7 @@ let bigTotal = 0
 let mqtt = require('mqtt') 
 let mysql = require('mysql')
 let db = null
-console.log(MQTT_SERVER)
+let mqttClient = null
 
 function mysqlRecordData (topic, message, payload) { 
     db.query('INSERT INTO event SET ?', {topic, payload})
@@ -66,7 +66,7 @@ function mqttAfterSubscribe (err, granted) {
 
 function init() { 
     console.log('connecting to MQTT server')
-    let mqttClient = mqtt.connect('mqtt://homebridge.local')
+    mqttClient = mqtt.connect('mqtt://homebridge.local')
     mqttClient.on('connect', () => { 
         console.log('connected')
         mqttClient.subscribe('#', mqttAfterSubscribe)
